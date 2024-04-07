@@ -15,7 +15,7 @@ class Baseline(nn.Module):
         self.fc = nn.Linear(hidden_size, num_classes)
         
     def forward(self, x):
-        batch_size = x.size(0)
+        batch_size = x.shape[0]
         h0 = torch.zeros(self.num_layers, batch_size, self.hidden_size).to(device)
         c0 = torch.zeros(self.num_layers, batch_size, self.hidden_size).to(device)
         out, _ = self.lstm(x, (h0, c0))
