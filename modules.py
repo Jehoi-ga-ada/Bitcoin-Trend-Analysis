@@ -55,7 +55,7 @@ def train_step(model: torch.nn.Module,
         x_batch, y_batch = torch.permute(batch[0].unsqueeze(0), (1, 0, 2)), batch[1]
 
         y_logits = model(x_batch).squeeze()
-        y_pred = torch.round(torch.sigmoid(y_logits, dim=0))
+        y_pred = torch.round(torch.sigmoid(y_logits))
         
         loss = loss_fn(y_logits, y_batch)
         acc = accuracy(y_batch, y_pred)
@@ -88,7 +88,7 @@ def test_step(model: torch.nn.Module,
             x_batch, y_batch = torch.permute(batch[0].unsqueeze(0), (1, 0, 2)), batch[1]
 
             y_logits = model(x_batch).squeeze()
-            y_pred = torch.round(torch.sigmoid(y_logits, dim=0))
+            y_pred = torch.round(torch.sigmoid(y_logits))
             
             if y_logits.dim() == 0:
                 y_logits = y_logits.unsqueeze(0)
